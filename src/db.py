@@ -47,7 +47,7 @@ def complete_task(todo_id):
     conn = sqlite3.connect("db.sqlite3")
     cur = conn.cursor()
 
-    update_query = """UPDATE tasks
+    update_query = """UPDATE todo
               SET completed = 1
               WHERE id = ?
               """
@@ -59,7 +59,7 @@ def update_task(todo_id, new_todo_detail):
     conn = sqlite3.connect("db.sqlite3")
     cur = conn.cursor()
 
-    update_query = """UPDATE tasks
+    update_query = """UPDATE todo
               SET todo_detail = ?
               WHERE id = ?
               """
