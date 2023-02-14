@@ -65,3 +65,16 @@ def update_task(todo_id, new_todo_detail):
               """
     cur.execute(update_query, (new_todo_detail, todo_id))
     conn.commit()
+
+
+def delete_task(todo_id):
+    conn = sqlite3.connect("db.sqlite3")
+    cur = conn.cursor()
+
+    delete_query = """
+        DELETE FROM todo
+        WHERE id = ?
+    """
+
+    cur.execute(delete_task, (todo_id,))
+    conn.commit()
