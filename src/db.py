@@ -76,5 +76,5 @@ def delete_task(todo_id):
         WHERE id = ?
     """
 
-    cur.execute(delete_task, (todo_id,))
+    cur.execute(delete_query, (todo_id,))
     conn.commit()
