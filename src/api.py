@@ -1,5 +1,11 @@
 from fastapi import FastAPI
-from .db import fetch_all_tasks, create_task, complete_task, update_task, delete_task
+from .db import (
+    fetch_all_tasks,
+    create_task,
+    toggle_task_completion,
+    update_task,
+    delete_task,
+)
 from .models import CreateTodoRequest, UpdateTodoRequest
 
 app = FastAPI()
@@ -31,7 +37,7 @@ def create_a_todo(todo: CreateTodoRequest):
 
 @app.put("/complete-todo")
 def complete_a_todo(todo_id: int):
-    complete_task(todo_id)
+    toggle_task_completion(todo_id)
 
     return {
         "success": True,

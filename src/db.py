@@ -43,15 +43,20 @@ def fetch_all_tasks():
     return tasks
 
 
-def complete_task(todo_id):
+def toggle_task_completion(todo_id):
     conn = sqlite3.connect("db.sqlite3")
     cur = conn.cursor()
 
+    res = cur.execute("SELECT * FROM todo WHERE id = ?;", (todo_id,))
+    curr_todo_completion = 0
+    for r in res:
+        curr_todo_completion = r[2]
+
     update_query = """UPDATE todo
-              SET completed = 1
+              SET completed = ?
               WHERE id = ?
               """
-    cur.execute(update_query, (todo_id,))
+    cur.execute(update_query, (0 if curr_todo_completion == 1 else 1, todo_id))
     conn.commit()
 
 
